@@ -1,0 +1,11 @@
+<svg width="640" height="180" viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cheddar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd35a" />
+      <stop offset="70%" stop-color="#ffb22f" />
+      <stop offset="100%" stop-color="#f08a19" />
+    </linearGradient>
+  </defs>
+  <path d="M80 40H560L520 150C470 135 420 165 360 155C300 145 250 170 190 155C140 142 110 150 100 150L80 60Z" fill="url(#cheddar)" />
+  <path d="M120 62H520L500 120C460 110 410 130 360 122C300 115 250 132 200 122C160 112 140 118 130 118L120 70Z" fill="#ffd86e" opacity="0.6" />
+</svg>

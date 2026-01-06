@@ -1,0 +1,22 @@
+<svg width="640" height="260" viewBox="0 0 640 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8c977" />
+      <stop offset="60%" stop-color="#e08b2f" />
+      <stop offset="100%" stop-color="#b85d1a" />
+    </linearGradient>
+    <radialGradient id="bunTopGlow" cx="0.5" cy="0.15" r="0.7">
+      <stop offset="0%" stop-color="#ffe4b4" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#f8c977" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <path d="M70 180C90 85 200 20 320 20C440 20 550 85 570 180C575 215 545 235 505 235H135C95 235 65 215 70 180Z" fill="url(#bunTop)" />
+  <path d="M120 125C190 75 450 75 520 125C530 145 510 155 470 155H170C130 155 110 145 120 125Z" fill="url(#bunTopGlow)" />
+  <circle cx="170" cy="95" r="6" fill="#fbe5b6" />
+  <circle cx="230" cy="78" r="5" fill="#fbe5b6" />
+  <circle cx="300" cy="70" r="6" fill="#fbe5b6" />
+  <circle cx="370" cy="78" r="5" fill="#fbe5b6" />
+  <circle cx="450" cy="96" r="6" fill="#fbe5b6" />
+  <circle cx="270" cy="108" r="4" fill="#fbe5b6" />
+  <circle cx="410" cy="110" r="4" fill="#fbe5b6" />
+</svg>

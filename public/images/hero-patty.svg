@@ -1,0 +1,11 @@
+<svg width="640" height="170" viewBox="0 0 640 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="patty" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b1d12" />
+      <stop offset="60%" stop-color="#5a2d1a" />
+      <stop offset="100%" stop-color="#7a3c21" />
+    </linearGradient>
+  </defs>
+  <path d="M50 50C70 20 150 10 320 10C490 10 570 20 590 50C610 80 590 130 540 140C470 155 170 155 100 140C50 130 30 80 50 50Z" fill="url(#patty)" />
+  <path d="M120 60H200M260 70H340M380 80H460" stroke="#7e4a2b" stroke-width="10" stroke-linecap="round" opacity="0.7" />
+</svg>
