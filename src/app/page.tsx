@@ -213,7 +213,7 @@ export default function Home() {
             <Button
               variant="outline"
               asChild
-              className="border-black text-black hover:bg-black/10"
+              className="border-black bg-transparent text-black hover:bg-black/10 hover:text-black"
             >
               <Link href="/cardapio">Ver cardapio completo</Link>
             </Button>
