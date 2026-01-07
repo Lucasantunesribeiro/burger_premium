@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { MenuPage } from "@/components/menu/menu-page";
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function CardapioPage() {
-  return <MenuPage />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#11131b]" />}>
+      <MenuPage />
+    </Suspense>
+  );
 }
