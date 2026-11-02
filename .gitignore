@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ferramentas de redesign
+.taste-skill/
+.hallmark/
+.vercel

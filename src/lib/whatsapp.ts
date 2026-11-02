@@ -45,12 +45,12 @@ export const buildOrderMessage = (summary: OrderSummary) => {
       lines.push(`- Bairro: ${summary.bairro}`);
     }
     if (summary.address) {
-      lines.push(`- Endereco: ${summary.address}`);
+      lines.push(`- Endereço: ${summary.address}`);
     }
   }
 
   if (summary.notes?.trim()) {
-    lines.push("", `Observacoes gerais: ${summary.notes.trim()}`);
+    lines.push("", `Observações gerais: ${summary.notes.trim()}`);
   }
 
   return lines.join("\n");

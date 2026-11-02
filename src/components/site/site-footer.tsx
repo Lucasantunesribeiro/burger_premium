@@ -1,86 +1,82 @@
 import Link from "next/link";
-import { Clock, MapPin, PhoneCall, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   BUSINESS_ADDRESS,
   BUSINESS_CITY,
-  BUSINESS_NAME,
-  BUSINESS_TAGLINE,
-  BUSINESS_WHATSAPP,
   BUSINESS_HOURS,
+  BUSINESS_WHATSAPP,
+  INSTAGRAM_HANDLE,
   LUCAS_WHATSAPP,
 } from "@/lib/constants";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { PhotoCredits } from "./photo-credits";
 
-export const SiteFooter = () => {
-  const businessLink = buildWhatsAppUrl(
-    BUSINESS_WHATSAPP,
-    "Ola! Quero fazer um pedido."
-  );
-  const lucasLink = buildWhatsAppUrl(
-    LUCAS_WHATSAPP,
-    "Ola Lucas! Quero um site igual ao Burger Premium."
-  );
+const links = [
+  { href: "/cardapio", label: "Cardápio" },
+  { href: "/promocoes", label: "Promoções" },
+  { href: "/contato", label: "Contato" },
+];
 
-  return (
-    <footer className="border-t border-border/60 bg-secondary/60">
-      <div className="mx-auto w-full max-w-[1400px] px-3 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div className="space-y-4">
-            <div className="space-y-1">
-              <p className="font-display text-3xl uppercase">{BUSINESS_NAME}</p>
-              <p className="text-sm text-muted-foreground">{BUSINESS_TAGLINE}</p>
-            </div>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>
-                  {BUSINESS_ADDRESS} · {BUSINESS_CITY}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-primary" />
-                <span>{BUSINESS_HOURS}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <PhoneCall className="h-4 w-4 text-primary" />
-                <a href={businessLink} className="underline-offset-4 hover:underline">
-                  WhatsApp da casa
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-              Navegacao
-            </p>
-            <nav className="flex flex-col gap-3 text-sm font-medium">
-              <Link href="/">Home</Link>
-              <Link href="/cardapio">Cardapio</Link>
-              <Link href="/promocoes">Promocoes</Link>
-              <Link href="/contato">Contato</Link>
-            </nav>
-          </div>
-          <div className="rounded-2xl border border-border/70 bg-background/80 p-6 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-              <Sparkles className="h-4 w-4 text-primary" />
-              Portfolio
-            </div>
-            <p className="mt-3 text-lg font-semibold">
-              Quer um igual? Fale com Lucas.
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Layout premium, desempenho rapido e foco total em pedidos no WhatsApp.
-            </p>
-            <Button asChild className="mt-4 w-full glow">
-              <a href={lucasLink}>Quero um igual</a>
-            </Button>
-          </div>
-        </div>
-        <p className="mt-10 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          DEMO Burger Premium. Marca ficticia para apresentacao.
+export const SiteFooter = () => (
+  <footer className="site-footer on-dark">
+    <div className="wrap footer-top">
+      <div className="footer-invite">
+        <p className="footer-lead">
+          Com fome? Monte o pedido e mande pelo WhatsApp.
         </p>
+        <a
+          className="btn"
+          href={buildWhatsAppUrl(BUSINESS_WHATSAPP, "Olá! Quero fazer um pedido.")}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pedir pelo WhatsApp
+        </a>
       </div>
-    </footer>
-  );
-};
+      <nav aria-label="Rodapé" className="footer-nav">
+        <ul className="footer-list">
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} className="footer-link">
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <address className="footer-address">
+        <span>{BUSINESS_ADDRESS}</span>
+        <span>{BUSINESS_CITY}</span>
+        <span>{BUSINESS_HOURS}</span>
+        <span>Instagram {INSTAGRAM_HANDLE}</span>
+      </address>
+    </div>
+    <div className="wrap footer-notes">
+      <p className="demo-note">
+        DEMO Burger Premium. Marca fictícia para apresentação, sem relação com
+        um estabelecimento real.
+      </p>
+      <p className="demo-note">
+        Quer um site assim para o seu negócio?{" "}
+        <a
+          className="text-link"
+          href={buildWhatsAppUrl(
+            LUCAS_WHATSAPP,
+            "Olá Lucas! Quero um site igual ao Burger Premium."
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Fale com o Lucas
+        </a>
+        .
+      </p>
+      <PhotoCredits />
+    </div>
+    <div className="wrap footer-name-box">
+      <div className="footer-name name-xl" aria-hidden="true">
+        <span>Burger</span>
+        <span>Premium</span>
+      </div>
+    </div>
+  </footer>
+);

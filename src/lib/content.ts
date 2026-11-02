@@ -42,13 +42,6 @@ export type Addon = {
   price: number;
 };
 
-export type Testimonial = {
-  name: string;
-  quote: string;
-  neighborhood: string;
-  rating: number;
-};
-
 export type FaqItem = {
   question: string;
   answer: string;
@@ -64,23 +57,23 @@ export type Promotion = {
 export const combos: Combo[] = [
   {
     id: "combo-clube",
-    name: "Combo Clube do Fogo",
+    name: "Clube do Fogo",
     description: "Burger 180g, cheddar cremoso, bacon e maionese da casa.",
     price: 49.9,
-    items: ["Burger Clube do Fogo", "Batata rustica", "Soda artesanal"],
-    tag: "Mais pedido",
+    items: ["Burger Clube do Fogo", "Batata rústica", "Soda artesanal"],
+    tag: "Da casa",
   },
   {
     id: "combo-trufa",
-    name: "Combo Trufa & Brie",
+    name: "Trufa & Brie",
     description: "Blend alto, queijo brie e cogumelos na manteiga.",
     price: 54.9,
-    items: ["Trufa & Brie", "Fritas canoas", "Chop gelado"],
+    items: ["Trufa & Brie", "Fritas canoa", "Chope gelado"],
     tag: "Premium",
   },
   {
     id: "combo-verde",
-    name: "Combo Green Deluxe",
+    name: "Green Deluxe",
     description: "Burger veggie, pesto verde e crispy de cebola.",
     price: 46.9,
     items: ["Green Deluxe", "Batata doce", "Limonada fresh"],
@@ -90,8 +83,8 @@ export const combos: Combo[] = [
 
 export const ingredients: Ingredient[] = [
   { name: "Blend da casa 180g", note: "carne bovina, peito e fraldinha" },
-  { name: "Pao brioche", note: "macio, tostado na manteiga" },
-  { name: "Molho secreto", note: "defumado, leve toque citrico" },
+  { name: "Pão brioche", note: "macio, tostado na manteiga" },
+  { name: "Molho secreto", note: "defumado, leve toque cítrico" },
   { name: "Picles artesanal", note: "feito na casa toda semana" },
   { name: "Queijo cheddar", note: "cremoso, derretido na chapa" },
 ];
@@ -108,12 +101,12 @@ export const menuCategories: MenuCategory[] = [
   {
     id: "burgers",
     label: "Burgers",
-    description: "Blend da casa, pao brioche e combinacoes autorais.",
+    description: "Blend da casa, pão brioche e combinações autorais.",
   },
   {
     id: "frango",
     label: "Frango",
-    description: "Crocrancia, molhos especiais e finalizacao na chapa.",
+    description: "Crocância, molhos especiais e finalização na chapa.",
   },
   {
     id: "vegetarianos",
@@ -128,7 +121,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: "bebidas",
     label: "Bebidas",
-    description: "Sodas artesanais, chas gelados e shakes.",
+    description: "Sodas artesanais, chás gelados e shakes.",
   },
   {
     id: "sobremesas",
@@ -169,20 +162,20 @@ export const menuItems: MenuItem[] = [
     isFeatured: true,
   },
   {
-    id: "crispy-jalapeno",
-    name: "Crispy Jalapeno",
-    description: "Queijo prato, jalapeno grelhado e cebola crispy.",
+    id: "crispy-jalapeño",
+    name: "Crispy Jalapeño",
+    description: "Queijo prato, jalapeño grelhado e cebola crispy.",
     price: 35.9,
     category: "burgers",
-    ingredients: ["Blend 160g", "Queijo prato", "Jalapeno"],
+    ingredients: ["Blend 160g", "Queijo prato", "Jalapeño"],
   },
   {
     id: "frango-crispy",
     name: "Crocante do Chef",
-    description: "Frango empanado, coleslaw e maionese de limao.",
+    description: "Frango empanado, coleslaw e maionese de limão.",
     price: 32.9,
     category: "frango",
-    ingredients: ["Frango crocante", "Coleslaw", "Maionese de limao"],
+    ingredients: ["Frango crocante", "Coleslaw", "Maionese de limão"],
     isFeatured: true,
   },
   {
@@ -196,7 +189,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "green-deluxe",
     name: "Green Deluxe",
-    description: "Burger de grao-de-bico, pesto verde e tomate assado.",
+    description: "Burger de grão-de-bico, pesto verde e tomate assado.",
     price: 33.9,
     category: "vegetarianos",
     ingredients: ["Burger veggie", "Pesto verde", "Tomate assado"],
@@ -212,17 +205,17 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "batata-rustica",
-    name: "Batata Rustica",
+    name: "Batata Rústica",
     description: "Rodelas grossas com alecrim e maionese da casa.",
     price: 18.9,
     category: "acompanhamentos",
-    ingredients: ["Batata rustica", "Alecrim", "Maionese"],
+    ingredients: ["Batata rústica", "Alecrim", "Maionese"],
     isFeatured: true,
   },
   {
     id: "onion-rings",
     name: "Onion Rings",
-    description: "Aneis de cebola crocantes com molho barbecue.",
+    description: "Anéis de cebola crocantes com molho barbecue.",
     price: 19.9,
     category: "acompanhamentos",
     ingredients: ["Cebola", "Empanado", "Barbecue"],
@@ -238,18 +231,18 @@ export const menuItems: MenuItem[] = [
   {
     id: "soda-ginger",
     name: "Soda Ginger",
-    description: "Soda artesanal de gengibre e limao.",
+    description: "Soda artesanal de gengibre e limão.",
     price: 12.9,
     category: "bebidas",
-    ingredients: ["Gengibre", "Limao", "Agua com gas"],
+    ingredients: ["Gengibre", "Limão", "Água com gás"],
   },
   {
     id: "cha-mate",
-    name: "Cha Mate Gelado",
-    description: "Cha mate com limao e leve adocicado.",
+    name: "Chá Mate Gelado",
+    description: "Chá mate com limão e leve adocicado.",
     price: 9.9,
     category: "bebidas",
-    ingredients: ["Cha mate", "Limao", "Acucar mascavo"],
+    ingredients: ["Chá mate", "Limão", "Açúcar mascavo"],
   },
   {
     id: "milkshake-baunilha",
@@ -258,7 +251,6 @@ export const menuItems: MenuItem[] = [
     price: 16.9,
     category: "bebidas",
     ingredients: ["Baunilha", "Leite", "Caramelo salgado"],
-    badge: "Mais vendido",
     isFeatured: true,
   },
   {
@@ -270,39 +262,18 @@ export const menuItems: MenuItem[] = [
     ingredients: ["Brownie", "Sorvete de creme"],
   },
   {
-    id: "cheesecake-limao",
-    name: "Cheesecake de Limao",
-    description: "Base crocante e cobertura fresca de limao.",
+    id: "cheesecake-limão",
+    name: "Cheesecake de Limão",
+    description: "Base crocante e cobertura fresca de limão.",
     price: 17.9,
     category: "sobremesas",
-    ingredients: ["Cheesecake", "Limao"],
-  },
-];
-
-export const testimonials: Testimonial[] = [
-  {
-    name: "Marina S.",
-    quote: "O defumado do Smoke BBQ e surreal. Chegou quente e perfeito.",
-    neighborhood: "Copacabana",
-    rating: 5,
-  },
-  {
-    name: "Rafael L.",
-    quote: "Batata rustica crocante e burger no ponto. Virou ritual de sexta.",
-    neighborhood: "Botafogo",
-    rating: 5,
-  },
-  {
-    name: "Luana P.",
-    quote: "O Trufa & Brie tem equilibrio perfeito. Quero provar todos.",
-    neighborhood: "Ipanema",
-    rating: 5,
+    ingredients: ["Cheesecake", "Limão"],
   },
 ];
 
 export const faqs: FaqItem[] = [
   {
-    question: "Qual o tempo medio de entrega?",
+    question: "Qual o tempo médio de entrega?",
     answer: "Em dias normais, entre 35 e 55 minutos. Finais de semana podem variar.",
   },
   {
@@ -310,12 +281,12 @@ export const faqs: FaqItem[] = [
     answer: "Sim, varia por bairro e aparece no atendimento pelo WhatsApp.",
   },
   {
-    question: "Tem retirada no balcao?",
+    question: "Tem retirada no balcão?",
     answer: "Sim. Informe no pedido e agilizamos o preparo para retirada.",
   },
   {
     question: "Vocês lidam com alergênicos?",
-    answer: "Temos itens com lactose e gluten. Avise sobre restricoes no pedido.",
+    answer: "Temos itens com lactose e glúten. Avise sobre restrições no pedido.",
   },
 ];
 
@@ -324,18 +295,66 @@ export const promotions: Promotion[] = [
     code: "SEGUNDOEMDOBRO",
     title: "Segunda em Dobro",
     description: "Comprou 1 burger, leva o segundo igual (DEMO).",
-    rules: ["Valido toda segunda", "Somente burgers da linha classica"],
+    rules: ["Válido toda segunda", "Somente burgers da linha clássica"],
   },
   {
     code: "FRETEGRATIS",
     title: "Frete acima de R$ 120",
-    description: "Frete gratis para pedidos acima de R$ 120 (DEMO).",
-    rules: ["Ate 6 km", "Pagamento via PIX ou cartao"],
+    description: "Frete grátis para pedidos acima de R$ 120 (DEMO).",
+    rules: ["Até 6 km", "Pagamento via PIX ou cartão"],
   },
   {
     code: "COMBO10",
     title: "10% em combos",
-    description: "10% off em qualquer combo no cardapio (DEMO).",
-    rules: ["Uso unico por cliente", "Nao cumulativo"],
+    description: "10% off em qualquer combo no cardápio (DEMO).",
+    rules: ["Uso único por cliente", "Não cumulativo"],
+  },
+];
+
+export type HeroStage = {
+  id: string;
+  line: string;
+  photoAlt: string;
+};
+
+export const heroStages: HeroStage[] = [
+  {
+    id: "brasa",
+    line: "Blend de peito e fraldinha, 180 gramas, na chapa.",
+    photoAlt: "Brasas acesas atrás de uma grelha com gordura",
+  },
+  {
+    id: "pao",
+    line: "Pão brioche tostado na manteiga.",
+    photoAlt: "Pães brioche artesanais sobre uma bancada",
+  },
+  {
+    id: "entrega",
+    line: "Da chapa para a sua porta em 35 a 55 minutos.",
+    photoAlt: "Carne assada em fogo de lenha sobre uma grelha artesanal",
+  },
+];
+
+export type OrderStep = {
+  title: string;
+  text: string;
+};
+
+export const orderSteps: OrderStep[] = [
+  {
+    title: "Escolha no cardápio",
+    text: "Burgers, frango, vegetarianos, acompanhamentos, bebidas e sobremesas. Toque em Adicionar.",
+  },
+  {
+    title: "Monte a comanda",
+    text: "Ajuste as quantidades e escreva observações por item, como o ponto da carne.",
+  },
+  {
+    title: "Informe a entrega",
+    text: "Bairro e endereço seguem só na mensagem, junto com o pedido.",
+  },
+  {
+    title: "Envie pelo WhatsApp",
+    text: "A mensagem sai pronta para a casa. A taxa de entrega é combinada no atendimento.",
   },
 ];

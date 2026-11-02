@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
-import { BUSINESS_NAME, BUSINESS_TAGLINE } from "@/lib/constants";
 
 export const runtime = "edge";
+
+export const alt = "Burger Premium, hamburgueria artesanal em Botafogo (demonstração)";
 
 export const size = {
   width: 1200,
@@ -10,40 +11,47 @@ export const size = {
 
 export const contentType = "image/png";
 
+// A imagem roda no edge, fora do CSS: os tokens da marca ficam aqui, em um só lugar.
+const tokens = {
+  tinta: "#050f16",
+  brasa: "#ff7a1f",
+  claro: "#f0f3f5",
+};
+
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
           height: "100%",
           width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #ffb347 0%, #ff5d2e 100%)",
-          color: "#1a120b",
+          padding: 64,
+          background: tokens.tinta,
+          color: tokens.brasa,
           fontFamily: "Arial, sans-serif",
+          fontWeight: 900,
+          textTransform: "uppercase",
+          letterSpacing: -6,
+          lineHeight: 0.9,
         }}
       >
+        <div style={{ fontSize: 190, display: "flex" }}>Burger</div>
+        <div style={{ fontSize: 190, display: "flex" }}>Premium</div>
         <div
           style={{
+            fontSize: 30,
             display: "flex",
-            flexDirection: "column",
-            gap: 24,
-            padding: 72,
-            borderRadius: 48,
-            background: "rgba(11, 12, 16, 0.9)",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
-            maxWidth: 900,
+            marginTop: 28,
+            letterSpacing: 0,
+            fontWeight: 400,
+            textTransform: "none",
+            color: tokens.claro,
           }}
         >
-          <div style={{ fontSize: 72, textTransform: "uppercase", color: "#fef3e4" }}>
-            {BUSINESS_NAME}
-          </div>
-          <div style={{ fontSize: 30, color: "#fef3e4" }}>{BUSINESS_TAGLINE}</div>
-          <div style={{ fontSize: 24, color: "#9cff5e" }}>
-            Peca pelo WhatsApp
-          </div>
+          Hamburgueria artesanal em Botafogo. Site de demonstração.
         </div>
       </div>
     ),

@@ -1,104 +1,103 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Manrope, Teko } from "next/font/google";
 import Script from "next/script";
+import { Libre_Franklin, Source_Serif_4 } from "next/font/google";
+import { RevealObserver } from "@/components/site/reveal-observer";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import {
   BUSINESS_ADDRESS,
-  BUSINESS_CITY,
-  BUSINESS_HOURS,
   BUSINESS_NAME,
-  BUSINESS_TAGLINE,
   SITE_URL,
 } from "@/lib/constants";
 import "./globals.css";
 
-const fontDisplay = Teko({
+const display = Libre_Franklin({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
+  weight: ["700"],
+  variable: "--font-libre-franklin",
+  display: "swap",
 });
 
-const fontBody = Manrope({
+const body = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-body",
-});
-
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-source-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Burger Premium | Hamburgueria artesanal",
+    default: "Burger Premium | Hamburgueria artesanal em Botafogo (DEMO)",
     template: "%s | Burger Premium",
   },
   description:
-    "Burger Premium: hamburgueria artesanal DEMO com delivery rapido, combos exclusivos e pedido facil pelo WhatsApp.",
+    "Demonstração de site para hamburgueria: cardápio, combos e pedido pelo WhatsApp. Marca fictícia para apresentação.",
+  alternates: { canonical: "/" },
+  robots: { index: false, follow: false },
   openGraph: {
-    title: "Burger Premium | Hamburgueria artesanal",
+    title: "Burger Premium",
     description:
-      "Combos premium, blend da casa e batata rustica. Peça direto pelo WhatsApp.",
+      "Blend da casa, pão brioche e batata rústica. Monte o pedido e envie pelo WhatsApp.",
     url: SITE_URL,
-    siteName: "Burger Premium",
+    siteName: BUSINESS_NAME,
     locale: "pt_BR",
     type: "website",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Burger Premium",
-      },
-    ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Burger Premium | Hamburgueria artesanal",
-    description:
-      "Combos premium, blend da casa e batata rustica. Peça direto pelo WhatsApp.",
-    images: ["/opengraph-image"],
+  twitter: { card: "summary_large_image" },
+};
+
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: BUSINESS_NAME,
+  description:
+    "Hamburgueria artesanal em Botafogo, no Rio de Janeiro. Marca fictícia para demonstração.",
+  url: SITE_URL,
+  servesCuisine: "Hambúrguer",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: BUSINESS_ADDRESS.split(" - ")[0],
+    addressLocality: "Rio de Janeiro",
+    addressRegion: "RJ",
+    addressCountry: "BR",
   },
+  openingHours: "Tu-Su 12:00-23:00",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    name: BUSINESS_NAME,
-    url: SITE_URL,
-    description: BUSINESS_TAGLINE,
-    servesCuisine: ["Hamburgueria", "Artesanal"],
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: BUSINESS_ADDRESS,
-      addressLocality: BUSINESS_CITY,
-      addressCountry: "BR",
-    },
-    openingHours: BUSINESS_HOURS,
-  };
-
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
-      <body
-        className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable} antialiased`}
-      >
-        <SiteHeader />
-        <main className="min-h-screen">{children}</main>
-        <SiteFooter />
-        <Script
-          id="restaurant-jsonld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    <html
+      lang="pt-BR"
+      className={`${display.variable} ${body.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Marca "js" antes da primeira pintura: os estados de animação só valem com script. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
         />
+      </head>
+      <body>
+        <a className="skip-link" href="#conteudo">
+          Pular para o conteúdo
+        </a>
+        <SiteHeader />
+        <main id="conteudo">{children}</main>
+        <SiteFooter />
+        <RevealObserver />
+        <Script
+          id="ld-restaurant"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify(restaurantSchema)}
+        </Script>
       </body>
     </html>
   );
