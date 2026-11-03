@@ -28,7 +28,7 @@ export default function PromocoesPage() {
           <p className="lead page-lead">Cupons de exemplo da casa, para pedidos feitos pelo WhatsApp.</p>
         </div>
       </section>
-      <PhotoStrip items={stripAlt} label="Hambúrguer com batata, brasas, Botafogo ao entardecer e pão brioche" />
+      <PhotoStrip items={stripAlt} label="Pedido para viagem, brasas, Botafogo ao entardecer e pão brioche" />
       <section className="band promos" aria-label="Cupons">
         <div className="wrap">
           <ul className="posters">

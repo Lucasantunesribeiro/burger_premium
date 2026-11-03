@@ -418,11 +418,11 @@ html {
 }
 
 .hero-photo:nth-child(1) {
-  object-position: 48% 50%;
+  object-position: 56% 50%;
 }
 
 .hero-photo:nth-child(3) {
-  object-position: 72% 50%;
+  object-position: 40% 50%;
 }
 
 .hero-photo:nth-child(n + 2) {
@@ -1067,9 +1067,7 @@ html {
   border: 2px solid currentColor;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--step-small);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: var(--step-body);
   line-height: 1.2;
 }
 
@@ -1157,12 +1155,33 @@ html {
 
 .strip-item {
   min-inline-size: 0;
+  overflow: hidden;
 }
 
 .strip-img {
   inline-size: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+@keyframes strip-drift {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .strip-img {
+    animation: strip-drift 16s ease-in-out infinite alternate;
+  }
+
+  .strip-item:nth-child(even) .strip-img {
+    animation-delay: -8s;
+  }
 }
 
 @media (min-width: 48rem) {

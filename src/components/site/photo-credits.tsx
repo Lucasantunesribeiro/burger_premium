@@ -13,7 +13,7 @@ const items = credits as Credit[];
 export const PhotoCredits = () => (
   <details className="credits">
     <summary className="credits-summary">Créditos das fotos e do vídeo</summary>
-    <p className="credits-text">Fotos e vídeo de arquivo, sem relação com a casa.</p>
+    <p className="credits-text">Fotos e vídeo de arquivo, sem relação com a casa. As duas imagens de hambúrguer foram geradas por inteligência artificial.</p>
     <ul className="credits-list">
       {items.map((credit) => (
         <li key={credit.page} className="credits-text">

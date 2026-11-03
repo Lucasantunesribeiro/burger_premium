@@ -43,18 +43,18 @@ export const fotos = {
     legenda: "Arcos da Lapa",
   },
   hamburguer: {
-    src: "/fotos/hamburguer-brioche-bacon.jpg",
-    alt: "Hambúrguer de pão brioche com bacon, queijo, tomate, cebola roxa e molho, sobre papel numa bandeja",
-    width: 1920,
-    height: 1440,
-    legenda: "Brioche, bacon e queijo",
+    src: "/fotos/hamburguer-brasa-gerado.jpg",
+    alt: "Hambúrguer com dois blends selados, cheddar derretido, alface e tomate, em tábua de ardósia com brasas ao fundo",
+    width: 1200,
+    height: 896,
+    legenda: "Dois blends, cheddar e brasa",
   },
-  hamburguerBatata: {
-    src: "/fotos/hamburguer-batata-rustica.jpg",
-    alt: "Hambúrguer com queijo, abacate, jalapeño e coentro ao lado de batatas fritas rústicas, numa bandeja",
-    width: 1705,
-    height: 1140,
-    legenda: "Hambúrguer e batata rústica",
+  entrega: {
+    src: "/fotos/entrega-hamburguer-gerado.jpg",
+    alt: "Hambúrguer aberto em papel kraft ao lado de uma sacola de papel e de um cone de batatas fritas",
+    width: 1200,
+    height: 896,
+    legenda: "Pedido pronto para viagem",
   },
 } satisfies Record<string, Foto>;
 

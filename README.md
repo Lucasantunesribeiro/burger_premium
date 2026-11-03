@@ -22,11 +22,12 @@ Build de produção: `npm run build` e `npm start`.
 
 ## Onde editar
 
-- `src/lib/constants.ts`: nome, WhatsApp, endereço, horário e `SITE_URL` (endereço público, usado em canonical, robots e sitemap)
+- `src/lib/constants.ts`: nome, WhatsApp, endereço, horário e `SITE_URL` (endereço público, usado em canonical e robots)
 - `src/lib/content.ts`: combos, ingredientes, cardápio, perguntas e promoções
 - `src/lib/fotos.ts`: fotos, textos alternativos e legendas
 - `src/lib/whatsapp.ts`: link `wa.me` e texto do pedido
 - `public/fotos/credits.json`: créditos de cada foto, exibidos no rodapé
+- `public/fotos/hamburguer-brasa-gerado.jpg` e `entrega-hamburguer-gerado.jpg`: imagens geradas por inteligência artificial (sem crédito de terceiros); as demais fotos têm licença livre listada em `credits.json`
 
 ## Dados de exemplo (confirmar antes de usar com um cliente real)
 

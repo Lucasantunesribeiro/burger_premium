@@ -31,7 +31,7 @@ export const stripDefault: Foto[] = [
 ];
 
 export const stripAlt: Foto[] = [
-  fotos.hamburguerBatata,
+  fotos.entrega,
   fotos.brasas,
   fotos.entardecer,
   fotos.brioche,
