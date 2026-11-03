@@ -21,7 +21,7 @@ export default function CardapioPage() {
           <p className="lead page-lead">Burgers, frango, vegetarianos, acompanhamentos e bebidas. Monte a comanda e envie pelo WhatsApp.</p>
         </div>
       </section>
-      <PhotoStrip items={stripDefault} label="Fotos de arquivo do fogo, do pão e do Rio" />
+      <PhotoStrip items={stripDefault} label="Hambúrguer, pão brioche, brasas e os Arcos da Lapa" />
       <section className="band menu-band" aria-label="Pedido">
         <Suspense fallback={<p className="wrap body">Carregando o cardápio.</p>}>
           <MenuPage />

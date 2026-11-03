@@ -286,7 +286,7 @@ export const MenuPage = () => {
               value={bairro}
               onChange={(event) => setBairro(event.target.value)}
               placeholder="Ex: Botafogo"
-              autoComplete="off"
+              autoComplete="address-level3"
             />
           </div>
           <div className="field">
@@ -299,7 +299,7 @@ export const MenuPage = () => {
               value={address}
               onChange={(event) => setAddress(event.target.value)}
               placeholder="Rua, número, complemento"
-              autoComplete="off"
+              autoComplete="street-address"
             />
           </div>
           <div className="field">

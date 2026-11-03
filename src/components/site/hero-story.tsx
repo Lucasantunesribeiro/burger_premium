@@ -6,7 +6,7 @@ import Link from "next/link";
 import { heroStages } from "@/lib/content";
 import { fotos } from "@/lib/fotos";
 
-const stagePhotos = [fotos.brasas, fotos.brioche, fotos.asado];
+const stagePhotos = [fotos.hamburguer, fotos.brioche, fotos.hamburguerBatata];
 
 /**
  * Primeira tela: o nome da casa em tamanho de fachada.

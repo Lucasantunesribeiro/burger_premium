@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PhotoStrip, stripDefault } from "@/components/site/photo-strip";
+import { PhotoStrip, stripAlt } from "@/components/site/photo-strip";
 import { BUSINESS_WHATSAPP } from "@/lib/constants";
 import { promotions } from "@/lib/content";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -28,7 +28,7 @@ export default function PromocoesPage() {
           <p className="lead page-lead">Cupons de exemplo da casa, para pedidos feitos pelo WhatsApp.</p>
         </div>
       </section>
-      <PhotoStrip items={stripDefault} label="Fotos de arquivo do fogo, do pão e do Rio" />
+      <PhotoStrip items={stripAlt} label="Hambúrguer com batata, brasas, Botafogo ao entardecer e pão brioche" />
       <section className="band promos" aria-label="Cupons">
         <div className="wrap">
           <ul className="posters">

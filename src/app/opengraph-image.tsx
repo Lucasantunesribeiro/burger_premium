@@ -1,7 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-
 export const alt = "Burger Premium, hamburgueria artesanal em Botafogo (demonstração)";
 
 export const size = {
@@ -11,14 +9,35 @@ export const size = {
 
 export const contentType = "image/png";
 
-// A imagem roda no edge, fora do CSS: os tokens da marca ficam aqui, em um só lugar.
+// A imagem é gerada no build, fora do CSS: os tokens da marca ficam aqui, em um só lugar.
 const tokens = {
   tinta: "#050f16",
   brasa: "#ff7a1f",
   claro: "#f0f3f5",
 };
 
-export default function OpenGraphImage() {
+const TEXTO = "BURGERPREMIUMburgerpremium Hamburgueria artesanal em Botafogo. Site de demonstração.";
+
+// Libre Franklin, a mesma fonte do site, só com os caracteres usados aqui.
+// Se o download falhar, a imagem sai com a fonte padrão em vez de quebrar o build.
+const carregarFonte = async (): Promise<ArrayBuffer | null> => {
+  try {
+    const css = await (
+      await fetch(
+        `https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@700&text=${encodeURIComponent(TEXTO)}`
+      )
+    ).text();
+    const url = css.match(/src: url\((.+?)\) format/)?.[1];
+    if (!url) return null;
+    return await (await fetch(url)).arrayBuffer();
+  } catch (error) {
+    console.error("Falha ao carregar a fonte da imagem social:", error);
+    return null;
+  }
+};
+
+export default async function OpenGraphImage() {
+  const fonte = await carregarFonte();
   return new ImageResponse(
     (
       <div
@@ -31,8 +50,8 @@ export default function OpenGraphImage() {
           padding: 64,
           background: tokens.tinta,
           color: tokens.brasa,
-          fontFamily: "Arial, sans-serif",
-          fontWeight: 900,
+          fontFamily: fonte ? "Libre Franklin" : "sans-serif",
+          fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: -6,
           lineHeight: 0.9,
@@ -46,7 +65,6 @@ export default function OpenGraphImage() {
             display: "flex",
             marginTop: 28,
             letterSpacing: 0,
-            fontWeight: 400,
             textTransform: "none",
             color: tokens.claro,
           }}
@@ -55,6 +73,11 @@ export default function OpenGraphImage() {
         </div>
       </div>
     ),
-    size
+    {
+      ...size,
+      fonts: fonte
+        ? [{ name: "Libre Franklin", data: fonte, weight: 700, style: "normal" }]
+        : undefined,
+    }
   );
 }

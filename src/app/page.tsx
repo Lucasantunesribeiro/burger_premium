@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const panels = [
   { foto: fotos.entardecer },
-  { foto: fotos.regatas },
+  { foto: fotos.asado },
   { foto: null },
   { foto: fotos.arcos },
 ] as const;
@@ -68,8 +68,7 @@ export default function HomePage() {
               {street}, {district}
             </h2>
             <p className="body">
-              Fotos de arquivo do bairro e do fogo. Os créditos estão no
-              rodapé.
+              Botafogo ao entardecer, a Lapa e o fogo da chapa.
             </p>
           </div>
           <ul className="panels">

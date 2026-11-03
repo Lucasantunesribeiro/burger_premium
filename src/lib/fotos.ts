@@ -42,12 +42,19 @@ export const fotos = {
     height: 1280,
     legenda: "Arcos da Lapa",
   },
-  regatas: {
-    src: "/fotos/sede-e-remadores-do-club-de-regatas.jpg",
-    alt: "Foto antiga de 1900 com remadores diante de uma sede à beira da água",
-    width: 1600,
-    height: 1200,
-    legenda: "Botafogo em 1900",
+  hamburguer: {
+    src: "/fotos/hamburguer-brioche-bacon.jpg",
+    alt: "Hambúrguer de pão brioche com bacon, queijo, tomate, cebola roxa e molho, sobre papel numa bandeja",
+    width: 1920,
+    height: 1440,
+    legenda: "Brioche, bacon e queijo",
+  },
+  hamburguerBatata: {
+    src: "/fotos/hamburguer-batata-rustica.jpg",
+    alt: "Hambúrguer com queijo, abacate, jalapeño e coentro ao lado de batatas fritas rústicas, numa bandeja",
+    width: 1705,
+    height: 1140,
+    legenda: "Hambúrguer e batata rústica",
   },
 } satisfies Record<string, Foto>;
 

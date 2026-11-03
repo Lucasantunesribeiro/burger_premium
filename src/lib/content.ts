@@ -321,7 +321,7 @@ export const heroStages: HeroStage[] = [
   {
     id: "brasa",
     line: "Blend de peito e fraldinha, 180 gramas, na chapa.",
-    photoAlt: "Brasas acesas atrás de uma grelha com gordura",
+    photoAlt: "Hambúrguer de pão brioche com bacon, queijo, tomate, cebola roxa e molho, sobre papel numa bandeja",
   },
   {
     id: "pao",
@@ -331,7 +331,7 @@ export const heroStages: HeroStage[] = [
   {
     id: "entrega",
     line: "Da chapa para a sua porta em 35 a 55 minutos.",
-    photoAlt: "Carne assada em fogo de lenha sobre uma grelha artesanal",
+    photoAlt: "Hambúrguer com queijo, abacate, jalapeño e coentro ao lado de batatas fritas rústicas, numa bandeja",
   },
 ];
 

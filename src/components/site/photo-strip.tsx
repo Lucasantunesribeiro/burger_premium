@@ -24,8 +24,15 @@ export const PhotoStrip = ({ items, label }: PhotoStripProps) => (
 );
 
 export const stripDefault: Foto[] = [
-  fotos.brasas,
+  fotos.hamburguer,
   fotos.brioche,
-  fotos.entardecer,
+  fotos.brasas,
   fotos.arcos,
+];
+
+export const stripAlt: Foto[] = [
+  fotos.hamburguerBatata,
+  fotos.brasas,
+  fotos.entardecer,
+  fotos.brioche,
 ];

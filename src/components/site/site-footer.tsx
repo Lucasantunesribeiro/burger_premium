@@ -4,7 +4,6 @@ import {
   BUSINESS_CITY,
   BUSINESS_HOURS,
   BUSINESS_WHATSAPP,
-  INSTAGRAM_HANDLE,
   LUCAS_WHATSAPP,
 } from "@/lib/constants";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -47,13 +46,14 @@ export const SiteFooter = () => (
         <span>{BUSINESS_ADDRESS}</span>
         <span>{BUSINESS_CITY}</span>
         <span>{BUSINESS_HOURS}</span>
-        <span>Instagram {INSTAGRAM_HANDLE}</span>
       </address>
     </div>
     <div className="wrap footer-notes">
+      <p className="seal">Modelo</p>
       <p className="demo-note">
-        DEMO Burger Premium. Marca fictícia para apresentação, sem relação com
-        um estabelecimento real.
+        Site de demonstração. Burger Premium é uma marca fictícia, sem relação
+        com um estabelecimento real. Endereço, horário, preços, promoções e
+        telefone são exemplos.
       </p>
       <p className="demo-note">
         Quer um site assim para o seu negócio?{" "}

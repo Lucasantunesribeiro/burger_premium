@@ -39,7 +39,7 @@ export default function ContatoPage() {
           <p className="lead page-lead">{BUSINESS_ADDRESS}, {BUSINESS_CITY}. {BUSINESS_HOURS}.</p>
         </div>
       </section>
-      <PhotoStrip items={stripDefault} label="Fotos de arquivo do fogo, do pão e do Rio" />
+      <PhotoStrip items={stripDefault} label="Hambúrguer, pão brioche, brasas e os Arcos da Lapa" />
       <section className="band contact" aria-label="Como falar com a casa">
         <div className="wrap contact-grid">
           <div className="contact-main" data-reveal>

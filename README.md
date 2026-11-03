@@ -1,35 +1,40 @@
-# Burger Premium (DEMO)
+# Burger Premium (demonstração)
 
-Site DEMO em pt-BR para hamburgueria premium, focado em conversao via WhatsApp.
+Site de demonstração em português do Brasil para uma hamburgueria artesanal em Botafogo, Rio de Janeiro. É um modelo de portfólio: a marca é fictícia, sem relação com um estabelecimento real, e as páginas levam `noindex, nofollow`.
+
+A ideia do site: o nome da casa vira a fachada. O nome gigante em preto sobre a cor da brasa, o cardápio em cartazes de uma linha por prato e um carrinho que monta a comanda e a envia pelo WhatsApp.
 
 ## Stack
-- Next.js App Router + TypeScript
-- Tailwind CSS + shadcn/ui
-- lucide-react
+
+- Next.js 16 (App Router) e TypeScript
+- Tailwind CSS 4 (tokens e componentes em `src/app/globals.css`)
+- Fontes `next/font/google`: Libre Franklin (títulos) e Source Serif 4 (texto)
+- Radix UI (acordeão) e lucide-react
 
 ## Rodar local
+
 ```bash
 npm install
 npm run dev
 ```
 
-## Conteudo editavel
-- `src/lib/constants.ts`: WhatsApp, identidade e dados base
-- `src/lib/content.ts`: combos, ingredientes, addons, depoimentos, FAQ, promocoes
-- `src/lib/whatsapp.ts`: helper `wa.me` e mensagem do pedido
-- `public/images`: artes locais usadas no hero e depoimentos
+Build de produção: `npm run build` e `npm start`.
+
+## Onde editar
+
+- `src/lib/constants.ts`: nome, WhatsApp, endereço, horário e `SITE_URL` (endereço público, usado em canonical, robots e sitemap)
+- `src/lib/content.ts`: combos, ingredientes, cardápio, perguntas e promoções
+- `src/lib/fotos.ts`: fotos, textos alternativos e legendas
+- `src/lib/whatsapp.ts`: link `wa.me` e texto do pedido
+- `public/fotos/credits.json`: créditos de cada foto, exibidos no rodapé
+
+## Dados de exemplo (confirmar antes de usar com um cliente real)
+
+Endereço, horário, preços, promoções, cupons, prazo de entrega e o número de WhatsApp da casa (`BUSINESS_WHATSAPP`, hoje um valor de preenchimento) são exemplos. O botão "Fale com o Lucas" usa o contato real do autor.
 
 ## Rotas
-- `/` Home
-- `/cardapio`
+
+- `/` início
+- `/cardapio` cardápio com carrinho e envio pelo WhatsApp (nada é guardado)
 - `/promocoes`
 - `/contato`
-
-## Checklist de entrega
-- [x] Home com hero, combos, delivery, mais vendidos, depoimentos, FAQ e CTA final
-- [x] Cardapio com carrinho, observacoes e checkout via WhatsApp
-- [x] Promocoes DEMO com cupons e regras simples
-- [x] Contato com CTA "Quero um igual" (WhatsApp Lucas)
-- [x] Metadata, Open Graph, JSON-LD, sitemap e robots
-- [x] `next/image` com imagens locais sem CLS
-- [x] README com instrucoes e fontes de conteudo
