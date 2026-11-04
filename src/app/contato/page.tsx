@@ -43,7 +43,7 @@ export default function ContatoPage() {
       <section className="band contact" aria-label="Como falar com a casa">
         <div className="wrap contact-grid">
           <div className="contact-main" data-reveal>
-            <h2 className="section-title">Fale com a {BUSINESS_NAME}</h2>
+            <h2 className="section-title" data-reveal>Fale com a {BUSINESS_NAME}</h2>
             <dl className="facts">
               <div className="fact" data-reveal>
                 <dt className="fact-label">Endereço</dt>
@@ -56,7 +56,7 @@ export default function ContatoPage() {
                 <dd className="fact-text">{BUSINESS_HOURS}</dd>
               </div>
             </dl>
-            <a href={businessLink} className="btn">
+            <a href={businessLink} className="btn" data-reveal>
               WhatsApp comercial
             </a>
           </div>
@@ -77,7 +77,7 @@ export default function ContatoPage() {
           <h2 id="igual-title" className="section-title">
             Quero um igual
           </h2>
-          <div className="mine-body">
+          <div className="mine-body" data-reveal>
             <p className="lead">
               Este site é um projeto de portfólio. Fale direto com o Lucas.
             </p>
