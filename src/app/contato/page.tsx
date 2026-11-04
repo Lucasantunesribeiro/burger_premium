@@ -36,7 +36,7 @@ export default function ContatoPage() {
           <h1 id="page-title" className="page-title name-page">
             Contato
           </h1>
-          <p className="lead page-lead">{BUSINESS_ADDRESS}, {BUSINESS_CITY}. {BUSINESS_HOURS}.</p>
+          <p className="lead page-lead" data-reveal>{BUSINESS_ADDRESS}, {BUSINESS_CITY}. {BUSINESS_HOURS}.</p>
         </div>
       </section>
       <PhotoStrip items={stripDefault} label="Hambúrguer, pão brioche, brasas e os Arcos da Lapa" />
@@ -45,13 +45,13 @@ export default function ContatoPage() {
           <div className="contact-main" data-reveal>
             <h2 className="section-title">Fale com a {BUSINESS_NAME}</h2>
             <dl className="facts">
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <dt className="fact-label">Endereço</dt>
                 <dd className="fact-text">
                   {BUSINESS_ADDRESS}, {BUSINESS_CITY}
                 </dd>
               </div>
-              <div className="fact">
+              <div className="fact" data-reveal>
                 <dt className="fact-label">Horário</dt>
                 <dd className="fact-text">{BUSINESS_HOURS}</dd>
               </div>

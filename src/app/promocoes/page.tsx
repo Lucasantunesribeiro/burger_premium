@@ -25,7 +25,7 @@ export default function PromocoesPage() {
           <h1 id="page-title" className="page-title name-page">
             Promoções
           </h1>
-          <p className="lead page-lead">Cupons de exemplo da casa, para pedidos feitos pelo WhatsApp.</p>
+          <p className="lead page-lead" data-reveal>Cupons de exemplo da casa, para pedidos feitos pelo WhatsApp.</p>
         </div>
       </section>
       <PhotoStrip items={stripAlt} label="Pedido para viagem, brasas, Botafogo ao entardecer e pão brioche" />
@@ -39,7 +39,7 @@ export default function PromocoesPage() {
                   <span className="visually-hidden">Código: </span>
                   {promo.code}
                 </p>
-                <div className="promo-body">
+                <div className="promo-body" data-reveal>
                   <p className="body">{promo.description}</p>
                   <ul className="promo-rules">
                     {promo.rules.map((rule) => (
