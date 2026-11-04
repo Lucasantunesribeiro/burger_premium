@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 /**
  * Revela elementos [data-reveal] quando entram na tela.
+ * Tudo o que já está dentro da tela ao carregar aparece de imediato, sem esperar o observador.
  * Sem JavaScript, ou com movimento reduzido, tudo fica visível desde o início:
  * a classe `reveal-ready` só é adicionada aqui.
  */
@@ -29,12 +30,12 @@ export const RevealObserver = () => {
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { rootMargin: "0px 0px -4% 0px", threshold: 0.01 }
     );
 
     targets.forEach((target) => {
       const rect = target.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.92) {
+      if (rect.top < window.innerHeight) {
         target.classList.add("is-in");
       } else {
         observer.observe(target);
