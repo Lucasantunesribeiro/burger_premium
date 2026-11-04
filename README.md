@@ -39,3 +39,16 @@ Endereço, horário, preços, promoções, cupons, prazo de entrega e o número 
 - `/cardapio` cardápio com carrinho e envio pelo WhatsApp (nada é guardado)
 - `/promocoes`
 - `/contato`
+
+## Checklist de entrega
+
+- [x] Início com abertura, apresentação da casa, faixa de fotos, combos, passo a passo do pedido, perguntas frequentes e chamada final para o cardápio
+- [x] Cardápio com carrinho, observações e envio do pedido pelo WhatsApp
+- [x] Promoções de demonstração, com cupons e regras simples
+- [x] Contato com endereço, horário e o bloco "Quero um igual" (WhatsApp do Lucas)
+- [x] Metadados, Open Graph, JSON-LD do tipo `Restaurant`, `robots` e canonical em `SITE_URL`
+- [x] Todas as páginas com `noindex, nofollow` e o selo "Modelo" no rodapé, por ser demonstração
+- [x] `next/image` para as fotos locais
+- [x] README com instruções e fontes de conteúdo
+- [ ] Depoimentos: não há. Saíram de propósito, porque a marca é fictícia e depoimento inventado não cabe num modelo
+- [ ] Sitemap: `/sitemap.xml` existe, mas devolve uma lista vazia enquanto o site for demonstração. Ele não lista páginas, para não apontar para página que pede para não ser indexada
