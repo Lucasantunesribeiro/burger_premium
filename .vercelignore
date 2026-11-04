@@ -1,0 +1,10 @@
+.env*
+.next
+.vercel
+node_modules
+.taste-skill
+.hallmark
+.impeccable
+design-system
+docs
+tsconfig.tsbuildinfo

@@ -1123,6 +1123,14 @@ html {
   display: block;
 }
 
+/* Com item na comanda, a barra fixa do pedido (3,5rem) cobriria o letreiro
+   no fim da página. O respiro mantém o letreiro inteiro acima dela. */
+@media (max-width: 59.99rem) {
+  body:has(.cart-bar) .site-footer {
+    padding-block-end: 3.5rem;
+  }
+}
+
 @media (min-width: 60rem) {
   .footer-top {
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
