@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { PhotoStrip, stripDefault } from "@/components/site/photo-strip";
+import { PageHead } from "@/components/site/page-head";
+import { PhotoStrip } from "@/components/site/photo-strip";
 import {
   BUSINESS_ADDRESS,
   BUSINESS_CITY,
@@ -31,19 +32,11 @@ export default function ContatoPage() {
 
   return (
     <>
-      <section className="page-head" aria-labelledby="page-title">
-        <div className="wrap">
-          <h1 id="page-title" className="page-title name-page">
-            Contato
-          </h1>
-          <p className="lead page-lead" data-reveal>{BUSINESS_ADDRESS}, {BUSINESS_CITY}. {BUSINESS_HOURS}.</p>
-        </div>
-      </section>
-      <PhotoStrip items={stripDefault} label="Hambúrguer, pão brioche, brasas e os Arcos da Lapa" />
+      <PageHead foto={fotos.entardecer} titulo="Contato" lead={`${BUSINESS_ADDRESS}, ${BUSINESS_CITY}. ${BUSINESS_HOURS}.`} />
       <section className="band contact" aria-label="Como falar com a casa">
         <div className="wrap contact-grid">
           <div className="contact-main" data-reveal>
-            <h2 className="section-title" data-reveal>Fale com a {BUSINESS_NAME}</h2>
+            <h2 className="titulo-grande">Fale com a {BUSINESS_NAME}</h2>
             <dl className="facts">
               <div className="fact" data-reveal>
                 <dt className="fact-label">Endereço</dt>
@@ -61,20 +54,14 @@ export default function ContatoPage() {
             </a>
           </div>
           <figure className="contact-photo" data-reveal>
-            <Image
-              src={fotos.entardecer.src}
-              alt={fotos.entardecer.alt}
-              width={fotos.entardecer.width}
-              height={fotos.entardecer.height}
-              sizes="(min-width: 60rem) 45vw, 100vw"
-              className="contact-img"
-            />
+            <Image src={fotos.arcos.src} alt={fotos.arcos.alt} fill sizes="(min-width: 60rem) 45vw, 100vw" className="foto-img" />
           </figure>
         </div>
       </section>
-      <section className="band mine on-dark" aria-labelledby="igual-title">
+      <PhotoStrip items={[fotos.duasMaos, fotos.salaoBar, fotos.refriGelo]} label="Comida, salão e bebida" />
+      <section className="band mine" aria-labelledby="igual-title">
         <div className="wrap mine-grid" data-reveal>
-          <h2 id="igual-title" className="section-title">
+          <h2 id="igual-title" className="titulo-medio">
             Quero um igual
           </h2>
           <div className="mine-body" data-reveal>

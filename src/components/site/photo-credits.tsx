@@ -1,6 +1,8 @@
 import credits from "../../../public/fotos/credits.json";
+import { autoresComida } from "@/lib/fotos";
 
 type Credit = {
+  file: string;
   title: string;
   creator: string;
   license: string;
@@ -8,12 +10,20 @@ type Credit = {
   page: string;
 };
 
-const items = credits as Credit[];
+/** Só o que aparece no site: Botafogo e Arcos da Lapa. */
+const USADOS = ["botafogo-beach", "brunaprado-arcos"];
+const items = (credits as Credit[]).filter((credit) => USADOS.some((nome) => credit.file.includes(nome)));
 
 export const PhotoCredits = () => (
   <details className="credits">
-    <summary className="credits-summary">Créditos das fotos e do vídeo</summary>
-    <p className="credits-text">Fotos e vídeo de arquivo, sem relação com a casa. As duas imagens de hambúrguer foram geradas por inteligência artificial.</p>
+    <summary className="credits-summary">Créditos das fotos</summary>
+    <p className="credits-text">
+      Fotos de comida e salão: {autoresComida.join(", ")}, via{" "}
+      <a href="https://unsplash.com" rel="noopener noreferrer" className="credits-link">
+        Unsplash
+      </a>
+      . Imagens ilustrativas.
+    </p>
     <ul className="credits-list">
       {items.map((credit) => (
         <li key={credit.page} className="credits-text">

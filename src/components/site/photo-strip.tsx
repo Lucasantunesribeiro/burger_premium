@@ -1,38 +1,20 @@
 import Image from "next/image";
-import { fotos, type Foto } from "@/lib/fotos";
+import type { Foto } from "@/lib/fotos";
 
-type PhotoStripProps = {
-  items: Foto[];
-  label: string;
-};
-
-export const PhotoStrip = ({ items, label }: PhotoStripProps) => (
-  <ul className="strip" aria-label={label}>
-    {items.map((foto) => (
-      <li key={foto.src} className="strip-item" data-reveal>
-        <Image
-          src={foto.src}
-          alt={foto.alt}
-          width={foto.width}
-          height={foto.height}
-          sizes="(min-width: 48rem) 25vw, 50vw"
-          className="strip-img"
-        />
-      </li>
-    ))}
-  </ul>
+/** Faixa de fotos entre as seções das páginas internas. */
+export const PhotoStrip = ({ items, label }: { items: Foto[]; label: string }) => (
+  <section className="wrap band-sm" aria-label={label}>
+    <ul className="strip" data-count={items.length}>
+      {items.map((foto) => (
+        <li key={foto.src}>
+          <figure data-reveal>
+            <div className="strip-frame">
+              <Image src={foto.src} alt={foto.alt} fill sizes="(min-width: 48rem) 33vw, 100vw" className="foto-img" />
+            </div>
+            <figcaption className="legenda">{foto.legenda}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
 );
-
-export const stripDefault: Foto[] = [
-  fotos.hamburguer,
-  fotos.brioche,
-  fotos.brasas,
-  fotos.arcos,
-];
-
-export const stripAlt: Foto[] = [
-  fotos.entrega,
-  fotos.brasas,
-  fotos.entardecer,
-  fotos.brioche,
-];

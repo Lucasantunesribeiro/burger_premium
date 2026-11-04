@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Libre_Franklin, Source_Serif_4 } from "next/font/google";
+import { Archivo, Source_Serif_4 } from "next/font/google";
 import { RevealObserver } from "@/components/site/reveal-observer";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -11,10 +11,10 @@ import {
 } from "@/lib/constants";
 import "./globals.css";
 
-const display = Libre_Franklin({
+const display = Archivo({
   subsets: ["latin"],
-  weight: ["700"],
-  variable: "--font-libre-franklin",
+  axes: ["wdth"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -22,7 +22,7 @@ const body = Source_Serif_4({
   subsets: ["latin"],
   weight: ["400", "600"],
   style: ["normal", "italic"],
-  variable: "--font-source-serif",
+  variable: "--font-texto",
   display: "swap",
 });
 

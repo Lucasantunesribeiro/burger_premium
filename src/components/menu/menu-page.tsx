@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { KeyboardEvent } from "react";
 import { useSearchParams } from "next/navigation";
-import { addons, menuCategories, menuItems, type MenuCategoryId } from "@/lib/content";
+import { PratoFoto } from "@/components/site/prato-card";
+import { addons, menuCategories, menuItems } from "@/lib/content";
+import { fotoDoItem } from "@/lib/fotos";
 import { BUSINESS_WHATSAPP } from "@/lib/constants";
 import { formatBRL } from "@/lib/format";
 import { buildOrderMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -21,19 +22,11 @@ type CartLine = CartItem & {
 
 export const MenuPage = () => {
   const searchParams = useSearchParams();
-  const [activeCategory, setActiveCategory] = useState<MenuCategoryId>(
-    menuCategories[0]?.id ?? "burgers"
-  );
   const [cart, setCart] = useState<CartItem[]>([]);
   const [bairro, setBairro] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
   const [addedFromQuery, setAddedFromQuery] = useState(false);
-
-  const category =
-    menuCategories.find((entry) => entry.id === activeCategory) ??
-    menuCategories[0];
-  const categoryItems = menuItems.filter((item) => item.category === category.id);
 
   const addItem = useCallback((id: string) => {
     setCart((prev) => {
@@ -124,80 +117,47 @@ export const MenuPage = () => {
     window.open(checkoutLink, "_blank", "noopener,noreferrer");
   };
 
-  const handleTabKeys = (event: KeyboardEvent<HTMLDivElement>) => {
-    const index = menuCategories.findIndex((entry) => entry.id === activeCategory);
-    let next = index;
-    if (event.key === "ArrowRight") next = (index + 1) % menuCategories.length;
-    else if (event.key === "ArrowLeft")
-      next = (index - 1 + menuCategories.length) % menuCategories.length;
-    else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = menuCategories.length - 1;
-    else return;
-    event.preventDefault();
-    const target = menuCategories[next];
-    setActiveCategory(target.id);
-    document.getElementById(`aba-${target.id}`)?.focus();
-  };
-
   return (
     <div className="wrap menu-layout">
       <div className="menu-main">
-        <div
-          className="chips"
-          role="tablist"
-          aria-label="Categorias do cardápio"
-          onKeyDown={handleTabKeys}
-        >
-          {menuCategories.map((entry) => {
-            const selected = entry.id === category.id;
-            return (
-              <button
-                key={entry.id}
-                type="button"
-                role="tab"
-                id={`aba-${entry.id}`}
-                aria-selected={selected}
-                aria-controls="painel-cardapio"
-                tabIndex={selected ? 0 : -1}
-                className="chip"
-                onClick={() => setActiveCategory(entry.id)}
-              >
-                {entry.label}
-              </button>
-            );
-          })}
-        </div>
+        <nav className="chips" aria-label="Categorias do cardápio">
+          {menuCategories.map((entry) => (
+            <a key={entry.id} className="chip" href={`#${entry.id}`}>
+              {entry.label}
+            </a>
+          ))}
+        </nav>
 
-        <div
-          role="tabpanel"
-          id="painel-cardapio"
-          aria-labelledby={`aba-${category.id}`}
-          className="menu-panel"
-        >
-          <p className="body category-desc">{category.description}</p>
-          <ul className="items">
-            {categoryItems.map((item) => (
-              <li key={item.id} className="item">
-                <div className="item-main">
-                  <h3 className="item-name">{item.name}</h3>
-                  <p className="item-desc">{item.description}</p>
-                  {item.badge ? (
-                    <span className="item-badge">{item.badge}</span>
-                  ) : null}
-                </div>
-                <span className="item-price">{formatBRL(item.price)}</span>
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => addItem(item.id)}
-                >
-                  Adicionar
-                  <span className="visually-hidden"> {item.name} ao pedido</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {menuCategories.map((entry) => (
+          <section key={entry.id} id={entry.id} className="menu-cat" aria-labelledby={`titulo-${entry.id}`}>
+            <h2 id={`titulo-${entry.id}`} className="titulo-medio">
+              {entry.label}
+            </h2>
+            <p className="body">{entry.description}</p>
+            <ul className="pratos pratos-menu">
+              {menuItems
+                .filter((item) => item.category === entry.id)
+                .map((item) => {
+                  const noPedido = cart.find((line) => line.id === item.id)?.quantity ?? 0;
+                  return (
+                    <li key={item.id} className="prato">
+                      <PratoFoto foto={fotoDoItem[item.id]} sizes="(min-width: 75rem) 22vw, (min-width: 36rem) 45vw, 100vw" />
+                      <div className="prato-linha">
+                        <h3 className="prato-nome">{item.name}</h3>
+                        <span className="prato-preco">{formatBRL(item.price)}</span>
+                      </div>
+                      <p className="prato-desc">{item.description}</p>
+                      {item.badge ? <span className="item-badge">{item.badge}</span> : null}
+                      <button type="button" className="btn btn-linha" onClick={() => addItem(item.id)}>
+                        {noPedido > 0 ? `Adicionar mais (${noPedido} no pedido)` : "Adicionar"}
+                        <span className="visually-hidden"> {item.name} ao pedido</span>
+                      </button>
+                    </li>
+                  );
+                })}
+            </ul>
+          </section>
+        ))}
 
         <section className="addons" aria-labelledby="adicionais-title">
           <h2 id="adicionais-title" className="block-title">
@@ -217,7 +177,7 @@ export const MenuPage = () => {
         </section>
       </div>
 
-      <aside id="comanda" className="ticket on-dark" aria-labelledby="comanda-title">
+      <aside id="comanda" className="ticket" aria-labelledby="comanda-title">
         <h2 id="comanda-title" className="block-title">
           Sua comanda
         </h2>

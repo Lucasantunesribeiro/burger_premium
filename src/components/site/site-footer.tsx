@@ -16,14 +16,14 @@ const links = [
 ];
 
 export const SiteFooter = () => (
-  <footer className="site-footer on-dark">
+  <footer className="site-footer">
     <div className="wrap footer-top">
       <div className="footer-invite">
         <p className="footer-lead">
           Com fome? Monte o pedido e mande pelo WhatsApp.
         </p>
         <a
-          className="btn"
+          className="btn btn-escuro"
           href={buildWhatsAppUrl(BUSINESS_WHATSAPP, "Olá! Quero fazer um pedido.")}
           target="_blank"
           rel="noopener noreferrer"
