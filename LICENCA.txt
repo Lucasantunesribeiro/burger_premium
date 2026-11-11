@@ -1,0 +1,10 @@
+Montagem do hambúrguer (branch feat/montagem-scroll)
+
+Camadas usadas, já existentes no projeto (SVGs originais, sem foto de banco):
+- public/images/hero-bun-bottom.svg — pão de baixo
+- public/images/hero-patty.svg — carne
+- public/images/hero-cheddar.svg — queijo
+- public/images/hero-lettuce.svg — salada
+- public/images/hero-bun-top.svg — pão de cima
+
+Nenhuma foto nova foi adicionada. Sem Unsplash, Pexels, Pixabay ou arte de outra marca nesta alteração.

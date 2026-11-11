@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BadgePercent,
-  MessageCircle,
-  ShoppingCart,
-  Star,
-  Truck,
-} from "lucide-react";
+import { MessageCircle, ShoppingCart, Star, Truck } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -23,7 +16,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { HeroCarousel } from "@/components/site/hero-carousel";
+import { BurgerAssembly } from "@/components/site/burger-assembly";
+import { PedirWhatsapp } from "@/components/site/pedir-whatsapp";
 import { combos, faqs, ingredients, menuItems, testimonials } from "@/lib/content";
 import { BUSINESS_WHATSAPP } from "@/lib/constants";
 import { formatBRL } from "@/lib/format";
@@ -38,27 +32,6 @@ const deliveryImage =
   "https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&w=1200&q=80";
 const testimonialBackdrop =
   "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80";
-const ctaImage =
-  "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80";
-
-const heroCarouselImages = [
-  {
-    src: "https://images.unsplash.com/photo-1674188474160-7945b1e4d4ca?auto=format&fit=crop&w=2400&q=80",
-    alt: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1708004581741-1fe73e7fdb43?auto=format&fit=crop&w=2400&q=80",
-    alt: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=2400&q=80",
-    alt: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=2400&q=80",
-    alt: "",
-  },
-];
 
 const comboImages: Record<string, string> = {
   "combo-clube":
@@ -92,55 +65,9 @@ export default function Home() {
 
   return (
     <div className="pb-24">
-      <section className="relative min-h-[100vh] overflow-visible bg-[#07080b] text-white lg:min-h-[104vh]">
-        <HeroCarousel
-          images={heroCarouselImages}
-          className="pointer-events-none z-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,156,64,0.35),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(140,255,80,0.18),transparent_45%)]" />
-        <div className="absolute inset-0 bg-diagonal opacity-10" />
-        <div className="absolute -bottom-16 left-0 right-0 h-20 rounded-t-[48px] bg-[#0b0c10]" />
-        <div className="relative z-10 mx-auto flex min-h-[90vh] w-full max-w-[900px] flex-col items-start gap-8 px-3 py-24 sm:px-6 lg:min-h-[96vh] lg:px-10 lg:py-32">
-          <div className="relative z-20 w-full space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#9cff5e]">
-              Street premium
-            </p>
-            <h1 className="font-display text-7xl uppercase leading-[0.85] sm:text-8xl lg:text-[110px]">
-              Street premium.
-              <span className="block text-[#9cff5e]">Carne no ponto.</span>
-            </h1>
-            <p className="text-lg text-white/75 sm:text-xl">
-              Blend da casa + brioche + batata rustica.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#9cff5e] text-black hover:bg-[#b6ff86]"
-              >
-                <a href={whatsappLink} aria-label="Pedir agora no WhatsApp">
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Pedir agora
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                asChild
-                size="lg"
-                className="border-white text-white hover:bg-white/10"
-              >
-                <Link href="/cardapio">
-                  Ver cardapio
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="relative -mt-8 rounded-t-[48px] bg-[#0b0c10] pt-16">
+      <BurgerAssembly />
+      <PedirWhatsapp id="pedir" variant="stage" />
+      <section className="relative bg-[#0b0c10] pt-16">
         <div className="mx-auto w-full max-w-[1400px] px-3 sm:px-6 lg:px-10">
           <div className="grid gap-6 rounded-[32px] border border-white/10 bg-[#11131b]/80 p-8 md:grid-cols-[1fr_2fr]">
             <div>
@@ -439,41 +366,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-[1400px] px-3 py-16 sm:px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-[32px] bg-[#8bff49] px-8 py-12 text-[#0b0c10] md:px-12">
-          <Image
-            src={ctaImage}
-            alt="Burger pronto para pedido"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-25"
-          />
-          <div className="absolute inset-0 bg-grid opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#8bff49] via-[#8bff49]/85 to-transparent" />
-          <div className="relative z-10 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em]">
-                <BadgePercent className="h-4 w-4" />
-                Pedido rapido
-              </div>
-              <h2 className="font-display text-4xl uppercase">
-                Peca agora. A rua ta chamando.
-              </h2>
-            </div>
-            <div className="flex flex-col justify-center gap-3">
-              <Button asChild size="lg" className="gap-2 bg-black text-white">
-                <a href={whatsappLink}>
-                  <MessageCircle className="h-4 w-4" />
-                  Pedir agora no WhatsApp
-                </a>
-              </Button>
-              <Button asChild variant="secondary" size="lg" className="bg-white">
-                <Link href="/promocoes">Ver promocoes</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PedirWhatsapp id="pedir-final" variant="end" />
     </div>
   );
 }

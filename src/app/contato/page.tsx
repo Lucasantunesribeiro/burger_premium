@@ -15,7 +15,7 @@ import {
   BUSINESS_HOURS,
   BUSINESS_NAME,
   BUSINESS_WHATSAPP,
-  LUCAS_WHATSAPP,
+  PORTFOLIO_WHATSAPP_URL,
 } from "@/lib/constants";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -34,10 +34,7 @@ export default function ContatoPage() {
     BUSINESS_WHATSAPP,
     "Ola! Quero falar com a Burger Premium."
   );
-  const lucasLink = buildWhatsAppUrl(
-    LUCAS_WHATSAPP,
-    "Ola Lucas! Quero um site igual ao Burger Premium."
-  );
+  const lucasLink = PORTFOLIO_WHATSAPP_URL;
 
   return (
     <div className="mx-auto w-full max-w-[1400px] px-3 py-16 sm:px-6 lg:px-10">

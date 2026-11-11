@@ -8,7 +8,7 @@ import {
   BUSINESS_TAGLINE,
   BUSINESS_WHATSAPP,
   BUSINESS_HOURS,
-  LUCAS_WHATSAPP,
+  PORTFOLIO_WHATSAPP_URL,
 } from "@/lib/constants";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -17,10 +17,7 @@ export const SiteFooter = () => {
     BUSINESS_WHATSAPP,
     "Ola! Quero fazer um pedido."
   );
-  const lucasLink = buildWhatsAppUrl(
-    LUCAS_WHATSAPP,
-    "Ola Lucas! Quero um site igual ao Burger Premium."
-  );
+  const lucasLink = PORTFOLIO_WHATSAPP_URL;
 
   return (
     <footer className="border-t border-border/60 bg-secondary/60">
