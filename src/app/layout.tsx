@@ -76,10 +76,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Marca "js" antes da primeira pintura: os estados de animação só valem com script. */}
+        {/* Marca "js" antes da primeira pintura: os estados de animação só valem com script.
+            Na home, já entra em "montando" (só a logo no topo), para o menu não piscar antes da cena. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
+            __html:
+              "var d=document.documentElement;d.classList.add('js');if(location.pathname==='/'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)d.dataset.cena='montando'",
           }}
         />
       </head>

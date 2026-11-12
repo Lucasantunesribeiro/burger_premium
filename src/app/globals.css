@@ -80,7 +80,14 @@ button, input, textarea { font: inherit; color: inherit; }
 .site-header { position: fixed; inset: 0 0 auto; z-index: 50; color: var(--claro); transition: background-color 200ms ease; }
 .site-header[data-solido="true"] { background: var(--carvao); }
 .site-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: var(--topo); }
-.wordmark { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--display); font-stretch: 118%; font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem); font-weight: 700; letter-spacing: -0.01em; text-decoration: none; }
+.site-header-row { container-type: inline-size; }
+.wordmark { display: inline-flex; align-items: center; min-height: 2.75rem; flex: none; text-decoration: none; --logo-tinta: var(--claro); --logo-faixa: #d0311c; transition: translate 650ms var(--saida), scale 650ms var(--saida); }
+.logo-svg { display: block; height: 3rem; width: auto; overflow: visible; }
+.nav-desk, .menu-btn { transition: opacity 420ms ease 280ms, translate 420ms var(--saida) 280ms, visibility 0s linear 0s; }
+/* home, lanche ainda no ar: só a logo, maior e centrada; o resto entra quando o lanche fecha */
+html[data-cena="montando"] .site-header .wordmark { translate: calc(50cqw - 50%) 0.7rem; scale: 1.45; }
+html[data-cena="montando"] .site-header :is(.nav-desk, .menu-btn, .menu-drawer) { opacity: 0; translate: 0 -0.5rem; visibility: hidden; pointer-events: none; transition: opacity 180ms ease, translate 180ms ease, visibility 0s linear 180ms; }
+html[data-cena] .site-header[data-solido="true"]:not([data-aberto="true"]) { background: transparent; }
 .nav-desk { display: none; align-items: center; gap: clamp(1rem, 2.5vw, 2.25rem); }
 .nav-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--display); font-stretch: 110%; font-size: 0.9375rem; font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 0.35em; text-decoration-line: none; }
 .nav-link:hover, .nav-link[aria-current="page"] { text-decoration-line: underline; text-decoration-color: var(--mostarda); }
@@ -285,7 +292,8 @@ button, input, textarea { font: inherit; color: inherit; }
 .credits-text { max-width: 100ch; font-size: 0.875rem; }
 .credits-list { display: grid; gap: 0.25rem; margin-top: 0.5rem; }
 .footer-name-box { margin-top: 1.5rem; }
-.footer-name { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1em; font-family: var(--display); font-stretch: 125%; font-size: clamp(2.4rem, 8.6vw, 9.5rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; color: var(--ketchup); padding-bottom: 0.15em; }
+.footer-name { --logo-tinta: var(--ink); --logo-faixa: var(--ketchup); padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.footer-logo { display: block; width: min(100%, 34rem); height: auto; }
 @media (min-width: 56rem) { .footer-top { grid-template-columns: 2fr 1fr 1fr; } }
 
 /* ---------- movimento ---------- */
@@ -309,8 +317,8 @@ button, input, textarea { font: inherit; color: inherit; }
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
 /* ---------- montagem: o hambúrguer explodido que se monta com o scroll ----------
-   Fundo quase preto, luz quente vindo da esquerda (a mesma que foi aplicada nas fotos das camadas),
-   "180g" e "NA CHAPA" gigantes atrás do lanche. */
+   Fundo quase preto, luz quente vindo da esquerda (a mesma que foi aplicada nas fotos das camadas).
+   Enquanto monta: só a logo e o lanche. Textos e menu entram depois que o pão de cima encaixa. */
 .mont {
   --fw: min(calc((100svh - 290px) / 0.956), 134vw);
   --respiro-topo: 88px;
@@ -326,9 +334,6 @@ button, input, textarea { font: inherit; color: inherit; }
   radial-gradient(38% 22% at 50% 100%, rgb(255 120 40 / 0.16), transparent 80%),
   linear-gradient(90deg, transparent 50%, rgb(0 0 0 / 0.6)); }
 
-.mont-tipo { position: absolute; inset-inline: 0; z-index: -1; margin: 0; max-width: none; text-align: center; white-space: nowrap; font-family: var(--display); font-stretch: 62%; font-weight: 900; line-height: 0.8; letter-spacing: -0.02em; text-transform: uppercase; color: #b42417; background: linear-gradient(90deg, #ef5a2c 0%, #b42417 38%, #5d120b 78%, #2c0a06 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; pointer-events: none; user-select: none; }
-.mont-tipo-a { top: calc(var(--topo) + 1svh); padding-bottom: 0.16em; font-size: min(50svh, 46vw); text-transform: none; }
-.mont-tipo-b { bottom: 3svh; font-size: min(27svh, 23vw); }
 
 .mont-sombra { position: absolute; left: 50%; bottom: calc(var(--respiro-base) - 1.6rem); width: calc(var(--fw) * 0.7); height: 3.4rem; margin-left: calc(var(--fw) * -0.35); background: radial-gradient(closest-side, rgb(0 0 0 / 0.9), rgb(0 0 0 / 0.5) 55%, transparent); transform-origin: 50% 50%; }
 .mont-migalhas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
@@ -352,7 +357,7 @@ button, input, textarea { font: inherit; color: inherit; }
 
 .mont-texto { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
 .mont-texto a { pointer-events: auto; }
-.mont-abre { position: absolute; left: var(--m); top: calc(var(--topo) + 1.25rem); max-width: 22rem; }
+.mont-abre { position: absolute; left: var(--m); top: calc(var(--topo) + 2.75rem); max-width: 22rem; }
 .mont-h1 { font-family: var(--display); font-stretch: 100%; font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.4rem); line-height: 1.02; letter-spacing: -0.015em; }
 .mont-lead { margin-top: 0.75rem; font-size: 1.0625rem; line-height: 1.45; color: rgb(255 248 236 / 0.82); }
 .mont-fim { position: absolute; left: var(--m); bottom: clamp(2rem, 9svh, 6rem); max-width: 22rem; }
@@ -365,8 +370,9 @@ button, input, textarea { font: inherit; color: inherit; }
 .mont-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--display); font-weight: 600; text-underline-offset: 0.3em; text-decoration-thickness: 1px; transition: text-decoration-color 160ms ease; text-decoration-color: rgb(255 248 236 / 0.45); }
 .mont-link:hover { text-decoration-color: var(--mostarda); }
 .mont :focus-visible { outline-color: var(--mostarda); }
-.mont-dica { position: absolute; left: 50%; bottom: 1.1rem; z-index: 5; translate: -50% 0; display: flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(255 248 236 / 0.75); }
-.mont-dica::after { content: ""; width: 1px; height: 1.6rem; background: currentColor; animation: dica 1.8s ease-in-out infinite; transform-origin: top; }
+.js .mont:not([data-estado="parado"]) :is(.mont-abre, .mont-fim) { opacity: 0; }
+.mont-dica { position: absolute; left: 50%; bottom: 1rem; z-index: 5; width: 2px; height: 2.25rem; margin-left: -1px; border-radius: 2px; background: linear-gradient(rgb(255 248 236 / 0.12), rgb(255 248 236 / 0.12)); overflow: hidden; }
+.mont-dica::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgb(255 248 236 / 0.8); animation: dica 1.8s ease-in-out infinite; transform-origin: top; }
 @keyframes dica { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
 /* sem script ou com movimento reduzido: o lanche já montado, botão à vista */
@@ -374,17 +380,18 @@ html:not(.js) .mont, .mont[data-estado="parado"] { height: 100svh; }
 html:not(.js) .mont .mont-camada, .mont[data-estado="parado"] .mont-camada { transform: translateY(var(--asm)); translate: none; }
 html:not(.js) .mont .mont-pingo, .mont[data-estado="parado"] .mont-pingo { display: none; }
 html:not(.js) .mont .mont-dica, .mont[data-estado="parado"] .mont-dica { display: none; }
-html:not(.js) .mont .mont-abre, .mont[data-estado="parado"] .mont-abre { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 html:not(.js) .mont .mont-quadro, .mont[data-estado="parado"] .mont-quadro { opacity: 1; }
 
 @media (max-width: 52rem) {
   .mont { --fw: min(calc((100svh - 300px) / 0.956), 128vw); --respiro-base: 210px; }
-  .mont-abre { top: auto; bottom: 5rem; right: var(--m); max-width: none; }
+  .mont-abre { top: calc(var(--topo) + 0.75rem); right: var(--m); max-width: 19rem; }
+  .mont-h1 { font-size: 1.5rem; }
+  .mont-fim-titulo { display: none; }
   .mont-lead { display: none; }
+  .logo-svg { height: 2.625rem; }
+  html[data-cena="montando"] .site-header .wordmark { scale: 1.3; }
   .mont-fim { left: var(--m); right: var(--m); bottom: 1.5rem; max-width: none; }
   .mont-acoes { justify-items: stretch; }
   .btn-zap { justify-content: center; }
   .mont-link { justify-content: center; }
-  .mont-tipo-a { top: calc(var(--topo) + 5.5rem); font-size: min(44svh, 62vw); }
-  .mont-tipo-b { bottom: calc(var(--respiro-base) + 1svh); font-size: min(22svh, 25vw); }
 }

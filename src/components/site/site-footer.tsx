@@ -7,6 +7,7 @@ import {
   LUCAS_WHATSAPP,
 } from "@/lib/constants";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { Logo } from "./logo";
 import { PhotoCredits } from "./photo-credits";
 
 const links = [
@@ -73,9 +74,8 @@ export const SiteFooter = () => (
       <PhotoCredits />
     </div>
     <div className="wrap footer-name-box">
-      <div className="footer-name name-xl" aria-hidden="true">
-        <span>Burger</span>
-        <span>Premium</span>
+      <div className="footer-name" aria-hidden="true">
+        <Logo className="footer-logo" titulo={null} />
       </div>
     </div>
   </footer>

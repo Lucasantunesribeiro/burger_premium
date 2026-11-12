@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Logo } from "./logo";
 
 const links = [
   { href: "/cardapio", label: "Cardápio" },
@@ -10,7 +11,11 @@ const links = [
   { href: "/contato", label: "Contato" },
 ];
 
-/** Cabeçalho sobre a foto da primeira tela; ganha fundo sólido quando a página desce. */
+/**
+ * Cabeçalho sobre a foto da primeira tela; ganha fundo sólido quando a página desce.
+ * Na home, enquanto o lanche se monta (html[data-cena="montando"]), só a logo aparece, centrada;
+ * a navegação entra quando o lanche fecha. Ver o bloco "cabeçalho" em globals.css.
+ */
 export const SiteHeader = () => {
   const pathname = usePathname();
   const [aberto, setAberto] = useState(false);
@@ -37,10 +42,10 @@ export const SiteHeader = () => {
   }, [aberto]);
 
   return (
-    <header className="site-header" data-solido={solido || aberto}>
+    <header className="site-header" data-solido={solido || aberto} data-aberto={aberto}>
       <div className="wrap site-header-row">
         <Link href="/" className="wordmark" aria-label="Burger Premium, início">
-          Burger Premium
+          <Logo className="logo-svg" titulo={null} />
         </Link>
         <nav aria-label="Principal" className="nav-desk">
           {links.map((link) => (

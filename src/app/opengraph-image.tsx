@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "Burger Premium, hamburgueria artesanal em Botafogo (demonstração)";
@@ -11,12 +13,11 @@ export const contentType = "image/png";
 
 // A imagem é gerada no build, fora do CSS: os tokens da marca ficam aqui, em um só lugar.
 const tokens = {
-  tinta: "#050f16",
-  brasa: "#ff7a1f",
-  claro: "#f0f3f5",
+  tinta: "#0b0806",
+  claro: "#fff8ec",
 };
 
-const TEXTO = "BURGERPREMIUMburgerpremium Hamburgueria artesanal em Botafogo. Site de demonstração.";
+const TEXTO = "Hamburgueria artesanal em Botafogo. Site de demonstração.";
 
 // Libre Franklin, a mesma fonte do site, só com os caracteres usados aqui.
 // Se o download falhar, a imagem sai com a fonte padrão em vez de quebrar o build.
@@ -37,7 +38,11 @@ const carregarFonte = async (): Promise<ArrayBuffer | null> => {
 };
 
 export default async function OpenGraphImage() {
-  const fonte = await carregarFonte();
+  const [fonte, logo] = await Promise.all([
+    carregarFonte(),
+    readFile(join(process.cwd(), "public/logo-burger-premium.svg")),
+  ]);
+  const logoSrc = `data:image/svg+xml;base64,${logo.toString("base64")}`;
   return new ImageResponse(
     (
       <div
@@ -47,28 +52,15 @@ export default async function OpenGraphImage() {
           justifyContent: "flex-end",
           height: "100%",
           width: "100%",
-          padding: 64,
+          padding: 72,
           background: tokens.tinta,
-          color: tokens.brasa,
+          color: tokens.claro,
           fontFamily: fonte ? "Libre Franklin" : "sans-serif",
           fontWeight: 700,
-          textTransform: "uppercase",
-          letterSpacing: -6,
-          lineHeight: 0.9,
         }}
       >
-        <div style={{ fontSize: 190, display: "flex" }}>Burger</div>
-        <div style={{ fontSize: 190, display: "flex" }}>Premium</div>
-        <div
-          style={{
-            fontSize: 30,
-            display: "flex",
-            marginTop: 28,
-            letterSpacing: 0,
-            textTransform: "none",
-            color: tokens.claro,
-          }}
-        >
+        <img src={logoSrc} width={560} height={293} alt="" />
+        <div style={{ fontSize: 30, display: "flex", marginTop: 36 }}>
           Hamburgueria artesanal em Botafogo. Site de demonstração.
         </div>
       </div>

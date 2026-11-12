@@ -31,6 +31,15 @@ const [FW, FH] = dados.frame;
 const BASE = dados.layers["pao-baixo"].y + dados.layers["pao-baixo"].h; // fundo do lanche, em px da foto
 const INICIO = 0.18; // a pilha já começa um pouco junta, para caber grande na tela
 const DERIVA = 0.42; // fração da descida feita "flutuando", antes da queda
+const MONTADO = 0.88; // pão de cima já assentou (pousa em 0.84 e achata até ~0.9): header e textos entram aqui
+
+/** Avisa o cabeçalho em que fase a cena está: só a logo enquanto monta, tudo depois. */
+const marcarCena = (fase: "montando" | "montado" | null) => {
+  const html = document.documentElement;
+  if (fase) {
+    if (html.dataset.cena !== fase) html.dataset.cena = fase;
+  } else if (html.dataset.cena) delete html.dataset.cena;
+};
 
 const pct = (v: number, total: number) => `${(v / total) * 100}%`;
 
@@ -45,6 +54,7 @@ export const Montagem = () => {
     const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduzido) {
       raiz.dataset.estado = "parado";
+      marcarCena(null);
       return;
     }
 
@@ -112,9 +122,9 @@ export const Montagem = () => {
     tl.to(pingo, { "--dx": "0%", "--amp": 0, duration: qb - qa, ease: "power2.inOut" }, qa);
     tl.to(pingo, { "--escorre": 1.55, duration: 0.2, ease: "power1.inOut" }, qb + 0.02);
 
-    // textos
-    tl.to(raiz.querySelector(".mont-abre"), { autoAlpha: 0, y: -24, duration: 0.08 }, 0.04);
-    tl.fromTo(raiz.querySelector(".mont-fim"), { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: "power2.out" }, 0.86);
+    // textos: nada aparece antes do pão de cima encaixar. O h1 só muda de opacidade (segue para leitores de tela).
+    tl.fromTo(raiz.querySelector(".mont-abre"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.07, ease: "power2.out" }, MONTADO);
+    tl.fromTo(raiz.querySelector(".mont-fim"), { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: "power2.out" }, MONTADO + 0.02);
     tl.fromTo(raiz.querySelector(".mont-sombra"), { opacity: 0.25, scaleX: 0.7 }, { opacity: 1, scaleX: 1, duration: 0.84 }, 0);
     tl.fromTo(raiz.querySelector(".mont-dica"), { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.04 }, 0.02);
 
@@ -246,13 +256,24 @@ export const Montagem = () => {
     /* ---------- ScrollTrigger com scrub ---------- */
     const pousos = CAMADAS.filter((c) => c.janela).map((c) => ({ nome: c.nome, em: c.janela![1], feito: false }));
     let anterior = 0;
+    // a fase vem da posição real da rolagem: depois que a cena sai de baixo, o cabeçalho volta ao normal
+    let fimCena = Infinity;
+    const sincronizarCena = () => {
+      if (window.scrollY > fimCena + 4) marcarCena(null);
+      else marcarCena(tl.progress() >= MONTADO ? "montado" : "montando");
+    };
     const st = ScrollTrigger.create({
       trigger: raiz,
       start: "top top",
       end: "bottom bottom",
       scrub: 0.7,
       animation: tl,
+      onRefresh: (gatilho) => {
+        fimCena = gatilho.end;
+        sincronizarCena();
+      },
     });
+    window.addEventListener("scroll", sincronizarCena, { passive: true });
     quadroAtualizar = () => {
       const p = tl.progress();
       enquadrar();
@@ -269,6 +290,7 @@ export const Montagem = () => {
       anterior = p;
       forcaVapor = gsap.utils.clamp(0, 1, (p - 0.8) / 0.1);
       raiz.dataset.estado = p > 0.97 ? "pronto" : "vivo";
+      sincronizarCena();
       if (forcaVapor > 0.01) ligar();
     };
     enquadrar();
@@ -298,6 +320,8 @@ export const Montagem = () => {
 
     return () => {
       window.removeEventListener("resize", aoRedimensionar);
+      window.removeEventListener("scroll", sincronizarCena);
+      marcarCena(null);
       window.clearInterval(garoa);
       io.disconnect();
       st.kill();
@@ -309,12 +333,6 @@ export const Montagem = () => {
     <section ref={secao} className="mont" aria-labelledby="hero-title" data-estado="estatico">
       <div className="mont-palco">
         <div className="mont-luz" aria-hidden="true" />
-        <p className="mont-tipo mont-tipo-a" aria-hidden="true">
-          180g
-        </p>
-        <p className="mont-tipo mont-tipo-b" aria-hidden="true">
-          NA CHAPA
-        </p>
 
         <div className="mont-sombra" aria-hidden="true" />
         <canvas className="mont-migalhas" aria-hidden="true" />
@@ -396,9 +414,8 @@ export const Montagem = () => {
           </div>
         </div>
 
-        <p className="mont-dica" aria-hidden="true">
-          Role para montar
-        </p>
+        {/* pista de rolagem sem frase: um fio que escorre para baixo */}
+        <span className="mont-dica" aria-hidden="true" />
       </div>
     </section>
   );
