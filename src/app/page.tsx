@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { BurgerAssembly } from "@/components/site/burger-assembly";
 import { HeroStory } from "@/components/site/hero-story";
+import { PedirWhatsapp } from "@/components/site/pedir-whatsapp";
 import { PratoFoto } from "@/components/site/prato-card";
 import { BUSINESS_HOURS } from "@/lib/constants";
 import { combos, faqs, ingredients, menuItems, orderSteps } from "@/lib/content";
@@ -36,6 +38,8 @@ export default function HomePage() {
   return (
     <>
       <HeroStory />
+      <BurgerAssembly />
+      <PedirWhatsapp id="pedir" />
 
       {/* As duas mãos e o título em arco: é aqui que a fome entra. */}
       <section className="arco" aria-labelledby="arco-title">
@@ -239,6 +243,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      <PedirWhatsapp id="pedir-final" />
     </>
   );
 }
