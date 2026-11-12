@@ -434,7 +434,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .pedir-whatsapp:focus-visible {
   background: #fff;
   color: var(--ink);
-  transform: scale(1.08);
+  transform: scale(1.14);
   box-shadow: 0 0 0 14px #2fbe4a;
   outline: none;
 }
