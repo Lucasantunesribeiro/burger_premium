@@ -324,7 +324,7 @@ html[data-cena] .site-header[data-solido="true"]:not([data-aberto="true"]) { bac
   --respiro-topo: 88px;
   --respiro-base: 40px;
   position: relative;
-  height: 430svh;
+  height: 240svh; /* ~1,4 tela de rolagem: o pão de cima encaixa em ~1 tela */
   background: #0b0806;
   color: var(--claro);
 }

@@ -18,20 +18,20 @@ type Nome = keyof typeof dados.layers;
  */
 const CAMADAS: { nome: Nome; alt: string; dy: number; rot: number; dx: number; janela?: [number, number] }[] = [
   { nome: "pao-baixo", alt: "Pão brioche de baixo, tostado", dy: 0, rot: 3, dx: 0 },
-  { nome: "alface", alt: "Folha de alface", dy: 148, rot: -5, dx: 26, janela: [0.06, 0.17] },
-  { nome: "picles", alt: "Rodelas de picles", dy: 318, rot: 7, dx: -38, janela: [0.15, 0.26] },
-  { nome: "cebola", alt: "Anéis de cebola", dy: 392, rot: -8, dx: 44, janela: [0.24, 0.35] },
-  { nome: "carne-2", alt: "Carne do blend da casa", dy: 586, rot: 5, dx: -30, janela: [0.33, 0.45] },
-  { nome: "carne-1", alt: "Carne do blend da casa, selada na chapa", dy: 732, rot: -4, dx: 28, janela: [0.43, 0.55] },
-  { nome: "queijo", alt: "Fatia de cheddar derretendo", dy: 1030, rot: 6, dx: -40, janela: [0.53, 0.64] },
-  { nome: "pao-cima", alt: "Pão brioche de cima com gergelim", dy: 1158, rot: -5, dx: 30, janela: [0.7, 0.84] },
+  { nome: "alface", alt: "Folha de alface", dy: 148, rot: -5, dx: 26, janela: [0.04, 0.17] },
+  { nome: "picles", alt: "Rodelas de picles", dy: 318, rot: 7, dx: -38, janela: [0.12, 0.25] },
+  { nome: "cebola", alt: "Anéis de cebola", dy: 392, rot: -8, dx: 44, janela: [0.2, 0.33] },
+  { nome: "carne-2", alt: "Carne do blend da casa", dy: 586, rot: 5, dx: -30, janela: [0.28, 0.42] },
+  { nome: "carne-1", alt: "Carne do blend da casa, selada na chapa", dy: 732, rot: -4, dx: 28, janela: [0.37, 0.51] },
+  { nome: "queijo", alt: "Fatia de cheddar derretendo", dy: 1030, rot: 6, dx: -40, janela: [0.46, 0.59] },
+  { nome: "pao-cima", alt: "Pão brioche de cima com gergelim", dy: 1158, rot: -5, dx: 30, janela: [0.6, 0.76] },
 ];
 
 const [FW, FH] = dados.frame;
 const BASE = dados.layers["pao-baixo"].y + dados.layers["pao-baixo"].h; // fundo do lanche, em px da foto
 const INICIO = 0.18; // a pilha já começa um pouco junta, para caber grande na tela
 const DERIVA = 0.42; // fração da descida feita "flutuando", antes da queda
-const MONTADO = 0.88; // pão de cima já assentou (pousa em 0.84 e achata até ~0.9): header e textos entram aqui
+const MONTADO = 0.8; // pão de cima já assentou (pousa em 0.76 e achata até ~0.82): header e textos entram aqui
 
 /** Avisa o cabeçalho em que fase a cena está: só a logo enquanto monta, tudo depois. */
 const marcarCena = (fase: "montando" | "montado" | null) => {
@@ -125,7 +125,7 @@ export const Montagem = () => {
     // textos: nada aparece antes do pão de cima encaixar. O h1 só muda de opacidade (segue para leitores de tela).
     tl.fromTo(raiz.querySelector(".mont-abre"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.07, ease: "power2.out" }, MONTADO);
     tl.fromTo(raiz.querySelector(".mont-fim"), { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: "power2.out" }, MONTADO + 0.02);
-    tl.fromTo(raiz.querySelector(".mont-sombra"), { opacity: 0.25, scaleX: 0.7 }, { opacity: 1, scaleX: 1, duration: 0.84 }, 0);
+    tl.fromTo(raiz.querySelector(".mont-sombra"), { opacity: 0.25, scaleX: 0.7 }, { opacity: 1, scaleX: 1, duration: 0.76 }, 0);
     tl.fromTo(raiz.querySelector(".mont-dica"), { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.04 }, 0.02);
 
     /* ---------- migalhas e gergelim caem a cada pouso ---------- */
@@ -266,7 +266,7 @@ export const Montagem = () => {
       trigger: raiz,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.7,
+      scrub: 0.9, // trecho curto: um pouco mais de inércia para as quedas não virem trancos
       animation: tl,
       onRefresh: (gatilho) => {
         fimCena = gatilho.end;
@@ -288,8 +288,8 @@ export const Montagem = () => {
         for (const pouso of pousos) if (p < pouso.em - 0.02) pouso.feito = false;
       }
       anterior = p;
-      forcaVapor = gsap.utils.clamp(0, 1, (p - 0.8) / 0.1);
-      raiz.dataset.estado = p > 0.97 ? "pronto" : "vivo";
+      forcaVapor = gsap.utils.clamp(0, 1, (p - 0.72) / 0.1);
+      raiz.dataset.estado = p > 0.92 ? "pronto" : "vivo";
       sincronizarCena();
       if (forcaVapor > 0.01) ligar();
     };
