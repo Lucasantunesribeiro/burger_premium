@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { HeroStory } from "@/components/site/hero-story";
+import { Montagem } from "@/components/site/montagem";
 import { PratoFoto } from "@/components/site/prato-card";
 import { BUSINESS_HOURS } from "@/lib/constants";
 import { combos, faqs, ingredients, menuItems, orderSteps } from "@/lib/content";
@@ -35,7 +35,38 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroStory />
+      <Montagem />
+
+      <section id="vitrine" className="wrap band" aria-labelledby="vitrine-title">
+        <header className="cabeco-secao">
+          <h2 id="vitrine-title" className="titulo-grande">
+            Escolha pela foto
+          </h2>
+          <p className="lead">Toque em Adicionar e o item já entra na sua comanda.</p>
+        </header>
+        <ul className="pratos">
+          {destaque.map((item, indice) => (
+            <li key={item.id} className="prato" data-reveal>
+              <PratoFoto foto={fotoDoItem[item.id]} sizes="(min-width: 60rem) 33vw, (min-width: 36rem) 50vw, 100vw" prioridade={indice < 3} />
+              <div className="prato-linha">
+                <h3 className="prato-nome">{item.name}</h3>
+                <span className="prato-preco">{formatBRL(item.price)}</span>
+              </div>
+              <p className="prato-desc">{item.description}</p>
+              <Link href={`/cardapio?add=${encodeURIComponent(item.id)}`} className="btn btn-linha">
+                Adicionar
+                <span className="visually-hidden"> {item.name} ao pedido</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="centro">
+          <Link href="/cardapio" className="btn">
+            Ver o cardápio completo
+          </Link>
+        </div>
+      </section>
+
 
       {/* As duas mãos e o título em arco: é aqui que a fome entra. */}
       <section className="arco" aria-labelledby="arco-title">
@@ -74,36 +105,6 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section id="vitrine" className="wrap band" aria-labelledby="vitrine-title">
-        <header className="cabeco-secao">
-          <h2 id="vitrine-title" className="titulo-grande">
-            Escolha pela foto
-          </h2>
-          <p className="lead">Toque em Adicionar e o item já entra na sua comanda.</p>
-        </header>
-        <ul className="pratos">
-          {destaque.map((item, indice) => (
-            <li key={item.id} className="prato" data-reveal>
-              <PratoFoto foto={fotoDoItem[item.id]} sizes="(min-width: 60rem) 33vw, (min-width: 36rem) 50vw, 100vw" prioridade={indice < 3} />
-              <div className="prato-linha">
-                <h3 className="prato-nome">{item.name}</h3>
-                <span className="prato-preco">{formatBRL(item.price)}</span>
-              </div>
-              <p className="prato-desc">{item.description}</p>
-              <Link href={`/cardapio?add=${encodeURIComponent(item.id)}`} className="btn btn-linha">
-                Adicionar
-                <span className="visually-hidden"> {item.name} ao pedido</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="centro">
-          <Link href="/cardapio" className="btn">
-            Ver o cardápio completo
-          </Link>
-        </div>
       </section>
 
       <section className="camadas" aria-labelledby="camadas-title">
